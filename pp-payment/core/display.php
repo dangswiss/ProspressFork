@@ -76,33 +76,35 @@ function pp_invoice_invoice_row($invoice, $page) {
 	// Setup row actions
 
 	if($page == 'outgoing') {
-		$row_actions = 	"<div class='row-actions'>";
+		$row_actions = '<div class="row-actions">';
 
 		if(!$invoice->is_paid)			
-			$row_actions .= "<span class='edit'><a href='$invoice_send_pay_link'>" . __( "Send Invoice", "prospress" ) . "</a> | </span>";
+			$row_actions .= "<span class='edit'><a href='$invoice_send_pay_link'>" . __( 'Send Invoice', 'prospress' ) . '</a> | </span>';
 
 		if($invoice->is_archived)
-			$row_actions .= "<span class='unarchive'><a href='$overview_link&pp_invoice_action=unrachive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( "Un-Archive", "prospress" ) . "</a> </span>";
+			$row_actions .= "<span class='unarchive'><a href='$overview_link&pp_invoice_action=unrachive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( 'Un-Archive', 'prospress' ) . '</a> </span>';
 
 		if(!$invoice->is_archived)
-			$row_actions .= "<span class='archive'><a href='$overview_link&pp_invoice_action=archive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( "Archive", "prospress" ) . "</a></span>";
+			$row_actions .= "<span class='archive'><a href='$overview_link&pp_invoice_action=archive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( 'Archive', 'prospress' ) . '</a> </span>';
+		
+		$row_actions .= '</div>';
+		$row_actions = apply_filters( 'pp_invoice_invoice_row_outgoing_actions', $row_actions, $invoice );
 
-		$row_actions .= "</div>";
 	}
-
-	if($page == 'incoming') {
-		$row_actions = 	"<div class='row-actions'>";
+	elseif($page == 'incoming') {
+		$row_actions = '<div class="row-actions">';
 
 		if(!$invoice->is_paid)
-			$row_actions .= "<span class='edit'><a href='$invoice_send_pay_link'>" . __( "Make Payment", "prospress" ) . "</a> | </span>";
+			$row_actions .= "<span class='edit'><a href='$invoice_send_pay_link'>" . __( 'Make Payment', 'prospress' ) . '</a> | </span>';
 
 		if($invoice->is_archived)
-			$row_actions .= "<span class='unarchive'><a href='$overview_link&pp_invoice_action=unrachive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( "Un-Archive", "prospress" ) . "</a>  </span>";
+			$row_actions .= "<span class='unarchive'><a href='$overview_link&pp_invoice_action=unrachive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( 'Un-Archive', 'prospress' ) . '</a> </span>';
 
 		if(!$invoice->is_archived)
-			$row_actions .= "<span class='archive'><a href='$overview_link&pp_invoice_action=archive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( "Archive", "prospress" ) . "</a>  </span>";
+			$row_actions .= "<span class='archive'><a href='$overview_link&pp_invoice_action=archive_invoice&multiple_invoices[0]=$invoice_id' class=''>" . __( 'Archive', 'prospress' ) . '</a> </span>';
 
-		$row_actions .= "</div>";
+		$row_actions .= '</div>';
+		$row_actions = apply_filters( 'pp_invoice_invoice_row_incoming_actions', $row_actions, $invoice );
 
 	}
 
